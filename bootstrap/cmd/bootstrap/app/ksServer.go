@@ -45,8 +45,8 @@ import (
 const JupyterPrototype = "jupyterhub"
 
 // root dir of local cached VERSIONED REGISTRIES
-const CachedRegistries = "/opt/versioned_registries"
-const CloudShellTemplatePath = "/opt/registries/kubeflow/deployment/gke/cloud_shell_templates"
+const CachedRegistries = "/Users/yangpa/tmp/kubeflow_deployment/versioned_registries"
+const CloudShellTemplatePath = "/Users/yangpa/go/src/github.com/kubeflow/kubeflow/deployment/gke/cloud_shell_templates"
 
 // key used for storing start time of a request to deploy in the request contexts
 const StartTime = "StartTime"
@@ -1277,6 +1277,11 @@ func makeDeployEndpoint(svc KsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(CreateRequest)
 		r := &basicServerResponse{}
+		log.Info("***** ")
+		for _, p := range req.AppConfig.Packages{
+			log.Info("***** "+p.Name)
+		}
+		req.StorageOption.CreatePipelinePersistentStorage = true
 		if req.Project != "kubeflow-prober-deploy" {
 			deployReqCounterRaw.Inc()
 			deployReqCounterUser.Inc()
