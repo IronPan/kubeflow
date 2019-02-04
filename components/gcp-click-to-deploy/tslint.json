@@ -18,6 +18,8 @@
     "no-reference": false,
     "quotemark": [true, "single", "jsx-double"],
     "semicolon": [true, "always"],
-    "variable-name": false
+    "variable-name": false,
+    "no-console": false,
+    "ordered-imports": false
   }
 }
